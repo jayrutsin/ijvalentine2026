@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Master's Secret Project 💖</title>
+    <title>Jay's Secret Project for Ice 💖</title>
     <style>
         :root {
             --primary: #ff4d6d;
@@ -15,7 +15,7 @@
         body {
             background-color: var(--bg);
             color: var(--text);
-            font-family: 'Fira Code', 'Courier New', monospace;
+            font-family: 'Sarabun', 'Fira Code', monospace;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -28,16 +28,17 @@
             width: 90%;
             max-width: 600px;
             background: #1e293b;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
             border: 1px solid #334155;
+            position: relative;
         }
 
         .terminal-header {
             display: flex;
             gap: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .dot { width: 12px; height: 12px; border-radius: 50%; }
@@ -47,46 +48,66 @@
 
         .code-area {
             font-size: 1.1rem;
-            line-height: 1.6;
+            line-height: 1.7;
+            min-height: 200px;
+            white-space: pre-wrap;
         }
 
-        .highlight { color: var(--code); }
-        .keyword { color: #c678dd; }
-        .string { color: #98c379; }
-
         #cursor {
-            border-left: 10px solid var(--primary);
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background: var(--primary);
+            margin-left: 5px;
+            vertical-align: middle;
             animation: blink 0.7s infinite;
         }
 
         @keyframes blink { 50% { opacity: 0; } }
 
         .actions {
-            margin-top: 30px;
+            margin-top: 35px;
             display: none;
             gap: 20px;
             justify-content: center;
         }
 
         button {
-            padding: 12px 25px;
+            padding: 14px 28px;
             border: none;
-            border-radius: 8px;
+            border-radius: 50px;
             cursor: pointer;
             font-weight: bold;
-            transition: 0.3s;
+            font-family: 'Sarabun', sans-serif;
+            transition: all 0.3s ease;
+            font-size: 1rem;
         }
 
-        #yesBtn { background: var(--primary); color: white; }
-        #noBtn { background: #475569; color: white; position: relative; }
+        #yesBtn { 
+            background: var(--primary); 
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+        }
+
+        #yesBtn:hover { transform: scale(1.1); }
+
+        #noBtn { 
+            background: #475569; 
+            color: white; 
+            position: absolute;
+        }
 
         #success-msg {
             display: none;
             text-align: center;
-            font-size: 1.5rem;
-            color: #27c93f;
         }
+
+        #success-msg h2 { color: var(--primary); font-size: 2rem; }
+        #success-msg p { font-size: 1.2rem; opacity: 0.9; }
+
+        .heart-icon { font-size: 50px; margin-bottom: 15px; }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -101,32 +122,36 @@
         <span id="cursor"></span>
 
         <div class="actions" id="action-buttons">
-            <button id="yesBtn">git commit -m "Yes!"</button>
-            <button id="noBtn">Abort Transaction</button>
+            <button id="yesBtn">git commit -m "ตกลงค่ะ ❤️"</button>
+            <button id="noBtn">Reject Request</button>
         </div>
 
         <div id="success-msg">
-            <h2>🎉 Build Success!</h2>
-            <p>I love you 3000, My Master's One.</p>
+            <div class="heart-icon">💖</div>
+            <h2>Build Success!</h2>
+            <p>สุขสันต์วันวาเลนไทน์นะครับคุณไอซ์</p>
+            <p style="font-size: 0.9rem; color: var(--code);">Status: รักคุณไอซ์เพิ่มขึ้น 1000%</p>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script>
-        const text = `> Initializing Valentine_2026...
-> Status: Connection Established
-> Checking dependencies...
-> Result: Love detected [v1.4.3]
+        const text = `> กำลังเชื่อมต่อหัวใจ... [OK]
+> ตรวจสอบสถานะ: คิดถึงมากเป็นพิเศษ
+> กำลังโหลดความรู้สึกจาก เจ ถึง ไอซ์...
 
-const myHeart = {
-  owner: "Master",
-  status: "In Love",
-  target: "You",
-  message: "Will you be my Valentine?"
-};`;
+const valentineProject = {
+  sender: "เจ",
+  receiver: "ไอซ์",
+  message: "เป็นแฟนกันตลอดไปเลยนะ",
+  commitment: "Infinity"
+};
+
+> รันคำสั่ง: valentineProject.ask();
+> "ไอซ์ครับ... วาเลนไทน์นี้ว่างเป็นแฟนกันไหม?"`;
 
         let i = 0;
-        const speed = 40;
+        const speed = 60;
 
         function typeWriter() {
             if (i < text.length) {
@@ -144,11 +169,10 @@ const myHeart = {
         const noBtn = document.getElementById('noBtn');
         const yesBtn = document.getElementById('yesBtn');
 
-        // ปุ่ม No ที่วิ่งหนี
+        // ปุ่ม No ที่วิ่งหนีแบบสุ่ม
         noBtn.addEventListener('mouseover', () => {
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
             const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-            noBtn.style.position = 'fixed';
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
         });
@@ -158,13 +182,30 @@ const myHeart = {
             document.getElementById('typed-text').style.display = 'none';
             document.getElementById('success-msg').style.display = 'block';
             
-            // ยิงพลุฉลอง
-            confetti({
-                particleCount: 150,
-                spread: 70,
-                origin: { y: 0.6 },
-                colors: ['#ff4d6d', '#ffffff', '#ff8fa3']
-            });
+            // เอฟเฟกต์พลุหัวใจ
+            var duration = 3 * 1000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+              confetti({
+                particleCount: 3,
+                angle: 60,
+                spread: 55,
+                origin: { x: 0 },
+                colors: ['#ff4d6d', '#ffffff']
+              });
+              confetti({
+                particleCount: 3,
+                angle: 120,
+                spread: 55,
+                origin: { x: 1 },
+                colors: ['#ff4d6d', '#ffffff']
+              });
+
+              if (Date.now() < end) {
+                requestAnimationFrame(frame);
+              }
+            }());
         });
     </script>
 </body>
