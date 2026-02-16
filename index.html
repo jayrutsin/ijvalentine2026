@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master's Secret Project 💖</title>
+    <style>
+        :root {
+            --primary: #ff4d6d;
+            --bg: #0f172a;
+            --text: #f8fafc;
+            --code: #38bdf8;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Fira Code', 'Courier New', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background: #1e293b;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid #334155;
+        }
+
+        .terminal-header {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .red { background: #ff5f56; }
+        .yellow { background: #ffbd2e; }
+        .green { background: #27c93f; }
+
+        .code-area {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .highlight { color: var(--code); }
+        .keyword { color: #c678dd; }
+        .string { color: #98c379; }
+
+        #cursor {
+            border-left: 10px solid var(--primary);
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .actions {
+            margin-top: 30px;
+            display: none;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        #yesBtn { background: var(--primary); color: white; }
+        #noBtn { background: #475569; color: white; position: relative; }
+
+        #success-msg {
+            display: none;
+            text-align: center;
+            font-size: 1.5rem;
+            color: #27c93f;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="terminal-header">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
+        </div>
+
+        <div class="code-area" id="typed-text"></div>
+        <span id="cursor"></span>
+
+        <div class="actions" id="action-buttons">
+            <button id="yesBtn">git commit -m "Yes!"</button>
+            <button id="noBtn">Abort Transaction</button>
+        </div>
+
+        <div id="success-msg">
+            <h2>🎉 Build Success!</h2>
+            <p>I love you 3000, My Master's One.</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        const text = `> Initializing Valentine_2026...
+> Status: Connection Established
+> Checking dependencies...
+> Result: Love detected [v1.4.3]
+
+const myHeart = {
+  owner: "Master",
+  status: "In Love",
+  target: "You",
+  message: "Will you be my Valentine?"
+};`;
+
+        let i = 0;
+        const speed = 40;
+
+        function typeWriter() {
+            if (i < text.length) {
+                document.getElementById("typed-text").innerText += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            } else {
+                document.getElementById("cursor").style.display = "none";
+                document.getElementById("action-buttons").style.display = "flex";
+            }
+        }
+
+        window.onload = typeWriter;
+
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+
+        // ปุ่ม No ที่วิ่งหนี
+        noBtn.addEventListener('mouseover', () => {
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        });
+
+        yesBtn.addEventListener('click', () => {
+            document.getElementById('action-buttons').style.display = 'none';
+            document.getElementById('typed-text').style.display = 'none';
+            document.getElementById('success-msg').style.display = 'block';
+            
+            // ยิงพลุฉลอง
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ff4d6d', '#ffffff', '#ff8fa3']
+            });
+        });
+    </script>
+</body>
+</html>
